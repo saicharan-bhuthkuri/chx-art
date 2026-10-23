@@ -11,9 +11,12 @@ import { ArtworkLightboxModal } from './components/Modals/ArtworkLightboxModal';
 import { WatchReelModal } from './components/Modals/WatchReelModal';
 import { AboutMeModal } from './components/Modals/AboutMeModal';
 import { MobileNavDrawer } from './components/Modals/MobileNavDrawer';
+import { Preloader } from './components/Preloader';
+import { useAssetPreloader } from './hooks/useAssetPreloader';
 import type { Artwork } from './data/portfolioData';
 
 export const App: React.FC = () => {
+  const { isReady, progress, statusText } = useAssetPreloader();
   const [activeSection, setActiveSection] = useState<string>('home');
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [isWatchReelOpen, setIsWatchReelOpen] = useState<boolean>(false);
@@ -68,17 +71,29 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F7F3EA] text-[#080807] flex flex-col relative selection:bg-[#E9A33B]/20">
-      
-      {/* Global Subtle Paper Grain Effect */}
-      <div className="fixed inset-0 pointer-events-none z-30 opacity-[0.035] bg-repeat bg-[radial-gradient(#080807_1px,transparent_1px)] bg-size-[16px_16px]" />
-
-      {/* Main Header */}
-      <Header
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-        onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+    <>
+      {/* Luxury Asset & Stylesheet Preloader */}
+      <Preloader
+        isReady={isReady}
+        progress={progress}
+        statusText={statusText}
       />
+
+      <div
+        className={`min-h-screen bg-[#F7F3EA] text-[#080807] flex flex-col relative selection:bg-[#E9A33B]/20 transition-opacity duration-700 ${
+          isReady ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        
+        {/* Global Subtle Paper Grain Effect */}
+        <div className="fixed inset-0 pointer-events-none z-30 opacity-[0.035] bg-repeat bg-[radial-gradient(#080807_1px,transparent_1px)] bg-size-[16px_16px]" />
+
+        {/* Main Header */}
+        <Header
+          activeSection={activeSection}
+          onNavigate={handleNavigate}
+          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+        />
 
       {/* Main Sections */}
       <main className="flex-1">
@@ -132,6 +147,7 @@ export const App: React.FC = () => {
       />
 
     </div>
+    </>
   );
 };
 

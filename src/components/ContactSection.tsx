@@ -2,7 +2,7 @@ import React from 'react';
 import { Mail, ArrowRight } from 'lucide-react';
 import { InstagramIcon } from './Decorative/InstagramIcon';
 import { contactData } from '../data/portfolioData';
-import contactBannerImg from '../assets/images/contact-gallery-banner.png';
+import contactBannerImg from '../assets/images/contact-gallery-banner.jpg';
 import { GoldStarburst } from './Decorative/GoldStarburst';
 
 export const ContactSection: React.FC = () => {

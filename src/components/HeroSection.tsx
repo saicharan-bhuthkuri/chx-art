@@ -26,6 +26,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <img
           src={heroSurrealScene}
           alt="CHX.ARTS — Surreal Architectural Exhibition"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-[56%_center] sm:object-center select-none pointer-events-none"
         />
 

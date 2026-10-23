@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { aboutData } from '../data/portfolioData';
 import studioImg from '../assets/images/about-studio.jpg';
-import collagePortraitImg from '../assets/images/about-charan-collage.jpg';
+import collagePortraitImg from '../assets/images/about-charan-portrait.jpg';
 import { GoldStarburst } from './Decorative/GoldStarburst';
 
 interface AboutSectionProps {
@@ -19,7 +19,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
       <div className="max-w-360 mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
-          
+
           {/* Left Column: Creative Studio Sanctuary */}
           <div className="lg:col-span-4 relative group">
             <div className="relative rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(23,22,19,0.12)] border border-[#24211D]/15 bg-[#171613]">
@@ -29,7 +29,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 className="w-full h-70 sm:h-85 lg:h-100 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
               />
-              
+
               {/* Subtle inner dark gradient for depth */}
               <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
@@ -56,7 +56,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           {/* Center Column: Editorial Narrative & Signature */}
           <div className="lg:col-span-4 flex flex-col justify-center px-0 lg:px-2">
-            
+
             {/* Eyebrow with gold framing lines */}
             <div className="flex items-center gap-3 mb-3">
               <div className="w-6 h-[1.5px] bg-[#C97824]" />
@@ -115,7 +115,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           {/* Right Column: Artist Mixed-Media Collage & Handwritten Inspirations */}
           <div className="lg:col-span-4 relative flex items-center justify-between sm:justify-start lg:justify-end gap-5 xl:gap-7 pt-4 lg:pt-0">
-            
+
             {/* Mixed-Media Art Portrait Card */}
             <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(23,22,19,0.14)] border border-[#C97824]/30 max-w-70 sm:max-w-[320px] lg:max-w-82.5 w-full bg-[#FFFDF7] group">
               <img
