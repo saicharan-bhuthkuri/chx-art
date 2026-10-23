@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-ivory: #F7F3EA;
+    --bg-antique: #F1EADF;
+    --bg-cream: #FFFDF7;
+    --text-primary: #080807;
+    --text-secondary: #171613;
+    --text-muted: #777570;
+    --gold-bronze: #A85A16;
+    --gold-orange: #C97824;
+    --gold-highlight: #E9A33B;
+    --gold-pale: #F4C76E;
+  }
+
+  body {
+    background-color: var(--bg-ivory);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Editorial Serif Headings */
+  h1, h2, h3, h4, .font-editorial {
+    font-family: 'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  /* Handwritten Fluid Calligraphy */
+  .font-script {
+    font-family: 'Alex Brush', 'Great Vibes', cursive;
+  }
+
+  .font-signature {
+    font-family: 'Alex Brush', cursive;
+  }
+}
+
+/* Hide Scrollbar Globally while preserving smooth scrolling */
+*::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+*,
+html,
+body {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* Gold Shimmer Glow */
+.gold-glow {
+  filter: drop-shadow(0 0 10px rgba(233, 163, 59, 0.45));
+}
+
+.gold-glow-subtle {
+  filter: drop-shadow(0 0 5px rgba(233, 163, 59, 0.25));
+}
+
+/* Animations */
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: subtle-float 5s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.animate-sparkle {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes arrow-nudge {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-arrow {
+  animation: arrow-nudge 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* Card Active / Hover Glow */
+.card-gold-active {
+  border-color: #E9A33B !important;
+  box-shadow: 0 16px 36px -4px rgba(201, 120, 36, 0.4), 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-14px) scale(1.04) !important;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes gold-halo-pulse {
+  0%, 100% {
+    box-shadow: 0 18px 36px -4px rgba(201, 120, 36, 0.42), 0 0 16px rgba(233, 163, 59, 0.28);
+  }
+  50% {
+    box-shadow: 0 22px 42px -4px rgba(201, 120, 36, 0.55), 0 0 24px rgba(233, 163, 59, 0.45);
+  }
+}
+
+.animate-gold-halo {
+  animation: gold-halo-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer-sweep 2.4s ease-in-out infinite;
+}
+
