@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "chx-arts",
     "public": "dist",
     "ignore": [
       "firebase.json",
