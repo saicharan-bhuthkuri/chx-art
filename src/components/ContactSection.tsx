@@ -4,8 +4,14 @@ import { InstagramIcon } from './Decorative/InstagramIcon';
 import { contactData } from '../data/portfolioData';
 import contactBannerImg from '../assets/images/contact-gallery-banner.jpg';
 import { GoldStarburst } from './Decorative/GoldStarburst';
+import { useParallax } from '../hooks/useParallax';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export const ContactSection: React.FC = () => {
+  const { ref: parallaxRef, offsetY } = useParallax(0.1);
+  const desktopRevealRef = useScrollReveal<HTMLDivElement>({ threshold: 0.1 });
+  const mobileRevealRef = useScrollReveal<HTMLDivElement>({ threshold: 0.1 });
+
   return (
     <section id="contact" className="relative w-full bg-[#F7F3EA] pt-4 pb-12 overflow-hidden">
       
@@ -18,16 +24,25 @@ export const ContactSection: React.FC = () => {
         - Zone 3 (x: ~87% to ~98%): Dark cliff face -> White cursive quote
         ========================================================================
       */}
-      <div className="hidden lg:block relative w-full aspect-3/1 min-h-115 xl:min-h-125 overflow-hidden select-none">
-        {/* Background Image Banner */}
+      <div
+        ref={(el) => {
+          parallaxRef.current = el;
+          if (desktopRevealRef.current !== el) {
+            (desktopRevealRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+          }
+        }}
+        className="hidden lg:block relative w-full aspect-3/1 min-h-115 xl:min-h-125 overflow-hidden select-none reveal-group"
+      >
+        {/* Background Image Banner with Subtle Cinematic Parallax */}
         <img
           src={contactBannerImg}
           alt="CHX Arts Exhibition & Gallery Portal"
-          className="w-full h-full object-cover object-center select-none pointer-events-none"
+          style={{ transform: `translate3d(0, ${offsetY * 0.28}px, 0) scale(1.08)` }}
+          className="w-full h-full object-cover object-center select-none pointer-events-none transition-transform duration-75 ease-out will-change-transform"
         />
 
         {/* --- ZONE 1: Left Dark Arch Text --- */}
-        <div className="absolute left-[3.8%] xl:left-[4.8%] top-[25%] xl:top-[28%] max-w-45 xl:max-w-55 pointer-events-none select-none z-20">
+        <div className="absolute left-[3.8%] xl:left-[4.8%] top-[25%] xl:top-[28%] max-w-45 xl:max-w-55 pointer-events-none select-none z-20 reveal-child reveal-slide-left">
           <p className="font-editorial text-sm xl:text-base tracking-[0.28em] text-white/95 uppercase leading-[1.38] font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
             LET'S CREATE<br />
             SOMETHING<br />
@@ -42,7 +57,7 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* --- ZONE 2: Center Sunlit Ivory Portal --- */}
-        <div className="absolute left-[59.5%] xl:left-[60.5%] max-w-80 xl:max-w-85 top-1/2 -translate-y-1/2 z-20 flex flex-col justify-center">
+        <div className="absolute left-[59.5%] xl:left-[60.5%] max-w-80 xl:max-w-85 top-1/2 -translate-y-1/2 z-20 flex flex-col justify-center reveal-child reveal-delay-2">
           {/* Section Heading */}
           <h2 className="font-editorial text-2xl xl:text-3xl font-bold text-[#080807] leading-[1.05] tracking-tight">
             {contactData.heading}
@@ -106,7 +121,7 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* --- ZONE 3: Far-Right Dark Cliff Quote (Placed high up where cliff is wide and solid dark) --- */}
-        <div className="absolute right-[2.5%] xl:right-[3.5%] top-[18%] xl:top-[20%] flex flex-col items-end text-right select-none pointer-events-none z-20">
+        <div className="absolute right-[2.5%] xl:right-[3.5%] top-[18%] xl:top-[20%] flex flex-col items-end text-right select-none pointer-events-none z-20 reveal-child reveal-slide-right reveal-delay-3">
           <p className="font-script text-base sm:text-lg xl:text-xl text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] leading-tight -rotate-2">
             Good Art<br />
             Takes Feeling<br />
@@ -123,9 +138,9 @@ export const ContactSection: React.FC = () => {
         Clean, beautifully stacked layout with full touch ergonomics:
         ========================================================================
       */}
-      <div className="lg:hidden px-4 sm:px-6 max-w-xl mx-auto space-y-6">
+      <div ref={mobileRevealRef} className="lg:hidden px-4 sm:px-6 max-w-xl mx-auto space-y-6 reveal-group">
         {/* Visual Artwork Banner Card */}
-        <div className="relative aspect-16/7 w-full rounded-2xl overflow-hidden shadow-lg border border-[#24211D]/15">
+        <div className="relative aspect-16/7 w-full rounded-2xl overflow-hidden shadow-lg border border-[#24211D]/15 reveal-child">
           <img
             src={contactBannerImg}
             alt="CHX Arts Exhibition & Gallery Portal"
@@ -143,7 +158,7 @@ export const ContactSection: React.FC = () => {
         </div>
 
         {/* Contact Info Card */}
-        <div className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#24211D]/10 shadow-md">
+        <div className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#24211D]/10 shadow-md reveal-child reveal-delay-2 artwork-card-transition">
           <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#080807] leading-tight">
             {contactData.heading}
           </h2>

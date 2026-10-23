@@ -3,6 +3,7 @@ import { ArrowRight, Play, ArrowDown } from 'lucide-react';
 import { GoldStarburst } from './Decorative/GoldStarburst';
 import { heroData } from '../data/portfolioData';
 import heroSurrealScene from '../assets/images/hero-surreal-scene.jpg';
+import { useParallax } from '../hooks/useParallax';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -13,6 +14,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onExploreClick,
   onWatchReelClick
 }) => {
+  const { ref: parallaxRef, offsetY } = useParallax(0.12);
+
   return (
     <section
       id="home"
@@ -21,15 +24,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* 
         Full-Width Master Architectural Artwork (1024x576 aspect ratio)
       */}
-      <div className="relative w-full aspect-[16/9.2] sm:aspect-video min-h-130 sm:min-h-145 lg:min-h-160 xl:min-h-180">
-        {/* Background Raw Master Painting — Calibrated to 56% on mobile so character sits comfortably in right-center and text stays in clean left sky */}
+      <div ref={parallaxRef} className="relative w-full aspect-[16/9.2] sm:aspect-video min-h-130 sm:min-h-145 lg:min-h-160 xl:min-h-180 overflow-hidden">
+        {/* Background Raw Master Painting — Calibrated with subtle parallax depth */}
         <img
           src={heroSurrealScene}
           alt="CHX.ARTS — Surreal Architectural Exhibition"
           fetchPriority="high"
           loading="eager"
           decoding="async"
-          className="w-full h-full object-cover object-[56%_center] sm:object-center select-none pointer-events-none"
+          style={{ transform: `translate3d(0, ${offsetY * 0.35}px, 0) scale(1.05)` }}
+          className="w-full h-full object-cover object-[56%_center] sm:object-center select-none pointer-events-none transition-transform duration-75 ease-out will-change-transform"
         />
 
         {/* Mobile Ambient Soft Ivory Scrim (Ensures crystal-clear typography on mobile without dimming the character or moon) */}

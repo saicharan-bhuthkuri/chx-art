@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { featuredArtworks, type Artwork } from '../data/portfolioData';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface FeaturedWorksSectionProps {
   onSelectArtwork: (artwork: Artwork) => void;
@@ -9,6 +10,7 @@ interface FeaturedWorksSectionProps {
 export const FeaturedWorksSection: React.FC<FeaturedWorksSectionProps> = ({
   onSelectArtwork
 }) => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ threshold: 0.1 });
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   
@@ -70,11 +72,11 @@ export const FeaturedWorksSection: React.FC<FeaturedWorksSectionProps> = ({
         </svg>
       </div>
 
-      <div className="max-w-360 mx-auto px-5 sm:px-8 lg:px-12">
+      <div ref={sectionRef} className="max-w-360 mx-auto px-5 sm:px-8 lg:px-12 reveal-group">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           
           {/* Left Column: Heading, Controls, Description (Matching Reference Image 1) */}
-          <div className="lg:col-span-3 flex flex-col justify-between pt-1">
+          <div className="lg:col-span-3 flex flex-col justify-between pt-1 reveal-child reveal-slide-left">
             <div>
               <h2 className="font-editorial text-3xl sm:text-4xl lg:text-[40px] font-bold tracking-tight text-[#080807] leading-[0.95]">
                 FEATURED<br />WORKS
@@ -114,7 +116,7 @@ export const FeaturedWorksSection: React.FC<FeaturedWorksSectionProps> = ({
           </div>
 
           {/* Right Column: 6 Narrow Cinematic Artwork Cards in 1 Row (Reference Image 1) */}
-          <div className="lg:col-span-9 relative">
+          <div className="lg:col-span-9 relative reveal-child reveal-slide-right reveal-delay-2">
             <div
               ref={scrollContainerRef}
               onMouseEnter={() => setIsPaused(true)}

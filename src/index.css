@@ -14,6 +14,10 @@
     --gold-pale: #F4C76E;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--bg-ivory);
     color: var(--text-primary);
@@ -166,5 +170,83 @@ body {
 
 .animate-shimmer {
   animation: shimmer-sweep 2.4s ease-in-out infinite;
+}
+
+/* Smooth Scroll Reveal & Viewport Transition System */
+.reveal-init,
+.reveal-group .reveal-child {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-active,
+.reveal-group.reveal-active .reveal-child,
+.reveal-slide-left.reveal-active,
+.reveal-slide-right.reveal-active {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+.reveal-delay-1, .reveal-delay-100 {
+  transition-delay: 100ms;
+}
+
+.reveal-delay-2, .reveal-delay-200 {
+  transition-delay: 200ms;
+}
+
+.reveal-delay-3, .reveal-delay-300 {
+  transition-delay: 300ms;
+}
+
+.reveal-delay-4, .reveal-delay-400 {
+  transition-delay: 400ms;
+}
+
+.reveal-delay-5, .reveal-delay-500 {
+  transition-delay: 500ms;
+}
+
+/* Card & Image Luxury Hover Transition */
+.artwork-card-transition {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Accessibility: Respect User's Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init,
+  .reveal-group .reveal-child,
+  .reveal-slide-left,
+  .reveal-slide-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 

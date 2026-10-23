@@ -4,6 +4,7 @@ import { aboutData } from '../data/portfolioData';
 import studioImg from '../assets/images/about-studio.jpg';
 import collagePortraitImg from '../assets/images/about-charan-portrait.jpg';
 import { GoldStarburst } from './Decorative/GoldStarburst';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface AboutSectionProps {
   onMoreAboutMeClick: () => void;
@@ -12,17 +13,19 @@ interface AboutSectionProps {
 export const AboutSection: React.FC<AboutSectionProps> = ({
   onMoreAboutMeClick
 }) => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ threshold: 0.12 });
+
   return (
     <section id="about" className="relative bg-[#F7F3EA] py-10 sm:py-14 lg:py-20 overflow-hidden border-y border-[#24211D]/8">
       {/* Ambient Warm Golden Aura */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_35%,rgba(201,120,36,0.07),transparent_70%)]" />
 
-      <div className="max-w-360 mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+      <div ref={sectionRef} className="max-w-360 mx-auto px-6 md:px-12 lg:px-16 relative z-10 reveal-group">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
 
           {/* Left Column: Creative Studio Sanctuary */}
-          <div className="lg:col-span-4 relative group">
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(23,22,19,0.12)] border border-[#24211D]/15 bg-[#171613]">
+          <div className="lg:col-span-4 relative group reveal-child reveal-slide-left">
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(23,22,19,0.12)] border border-[#24211D]/15 bg-[#171613] artwork-card-transition group-hover:shadow-[0_22px_50px_rgba(23,22,19,0.2)]">
               <img
                 src={studioImg}
                 alt="Charan's Creative Studio & Workspace — CHX.ARTS"
@@ -55,7 +58,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
 
           {/* Center Column: Editorial Narrative & Signature */}
-          <div className="lg:col-span-4 flex flex-col justify-center px-0 lg:px-2">
+          <div className="lg:col-span-4 flex flex-col justify-center px-0 lg:px-2 reveal-child reveal-delay-2">
 
             {/* Eyebrow with gold framing lines */}
             <div className="flex items-center gap-3 mb-3">
@@ -86,7 +89,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               {['Visual Design', 'Fine Art', 'Sketches', 'Anime', 'Devotional'].map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-medium tracking-wide uppercase px-2.5 py-1 rounded-full bg-white/70 text-[#171613]/80 border border-[#24211D]/10 shadow-xs"
+                  className="text-[10px] font-medium tracking-wide uppercase px-2.5 py-1 rounded-full bg-white/70 text-[#171613]/80 border border-[#24211D]/10 shadow-xs hover:border-[#C97824]/50 transition-colors"
                 >
                   {tag}
                 </span>
@@ -105,7 +108,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               {/* Capsule Button */}
               <button
                 onClick={onMoreAboutMeClick}
-                className="group inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-[#080807]/30 hover:border-[#C97824] bg-white/80 hover:bg-[#080807] text-[#080807] hover:text-white shadow-xs hover:shadow-lg transition-all duration-300 text-[11px] sm:text-xs font-semibold tracking-wider uppercase cursor-pointer backdrop-blur-xs"
+                className="group inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-[#080807]/30 hover:border-[#C97824] bg-white/80 hover:bg-[#080807] text-[#080807] hover:text-white shadow-xs hover:shadow-lg transition-all duration-300 text-[11px] sm:text-xs font-semibold tracking-wider uppercase cursor-pointer backdrop-blur-xs active:scale-95"
               >
                 <span>{aboutData.ctaText}</span>
                 <ArrowRight size={13} className="text-[#C97824] group-hover:text-white transition-all duration-300 group-hover:translate-x-1" />
@@ -114,10 +117,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
 
           {/* Right Column: Artist Mixed-Media Collage & Handwritten Inspirations */}
-          <div className="lg:col-span-4 relative flex items-center justify-between sm:justify-start lg:justify-end gap-5 xl:gap-7 pt-4 lg:pt-0">
+          <div className="lg:col-span-4 relative flex items-center justify-between sm:justify-start lg:justify-end gap-5 xl:gap-7 pt-4 lg:pt-0 reveal-child reveal-slide-right reveal-delay-3">
 
             {/* Mixed-Media Art Portrait Card */}
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(23,22,19,0.14)] border border-[#C97824]/30 max-w-70 sm:max-w-[320px] lg:max-w-82.5 w-full bg-[#FFFDF7] group">
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(23,22,19,0.14)] border border-[#C97824]/30 max-w-70 sm:max-w-[320px] lg:max-w-82.5 w-full bg-[#FFFDF7] group artwork-card-transition group-hover:shadow-[0_26px_58px_rgba(23,22,19,0.24)]">
               <img
                 src={collagePortraitImg}
                 alt="Portrait of Charan — Mixed-Media Fine Art Collage"

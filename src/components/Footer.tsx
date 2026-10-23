@@ -57,12 +57,13 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Back to Top Control */}
           <button
             onClick={onScrollToTop}
-            className="w-10 h-10 rounded-full border border-[#C97824]/60 hover:border-[#C97824] hover:bg-[#C97824]/10 flex items-center justify-center transition-all duration-300 group cursor-pointer"
+            className="w-10 h-10 rounded-full border border-[#C97824]/60 hover:border-[#C97824] bg-white/60 hover:bg-[#C97824]/10 flex items-center justify-center transition-all duration-300 group cursor-pointer shadow-xs hover:shadow-md hover:scale-110 active:scale-90"
             aria-label="Back to top of page"
+            title="Scroll back to top"
           >
             <ArrowUp
               size={16}
-              className="text-[#C97824] group-hover:-translate-y-0.5 transition-transform"
+              className="text-[#C97824] group-hover:-translate-y-1 transition-transform duration-300"
             />
           </button>
         </div>
